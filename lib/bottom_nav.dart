@@ -5,7 +5,6 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import 'custom_drawer.dart';
 
-
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
 
@@ -17,11 +16,10 @@ class _BottomNavState extends State<BottomNav> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-
     HomeScreen(),
-     Center(child: Text('Likes Screen')),
-     Center(child: Text('Search Screen')),
-     Center(child: Text('Profile Screen')),
+    Center(child: Text('Likes Screen')),
+    Center(child: Text('Search Screen')),
+    Center(child: Text('Profile Screen')),
   ];
 
   @override
@@ -29,17 +27,25 @@ class _BottomNavState extends State<BottomNav> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Chauddagram Insights"),
-        backgroundColor: Colors.blueAccent,
+        titleTextStyle: TextStyle(fontSize: 20, color: Colors.black
+
+        ),
+
+        backgroundColor: Colors.white,
         centerTitle: true,
 
-        automaticallyImplyLeading: false, // ❌ Default drawer icon বন্ধ করলো
+        automaticallyImplyLeading: false,
 
-        leading: Builder( // ✅ Custom icon clickable রাখার জন্য
-          builder: (context) => IconButton(
-            padding: EdgeInsets.fromLTRB(2, 0, 7, 0),
-            icon: Icon(Icons.menu_open), // 🔄 Change this to any icon you like
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
+        // ❌ Default drawer icon বন্ধ করলো
+        leading: Builder(
+          // ✅ Custom icon clickable রাখার জন্য
+          builder:
+              (context) => IconButton(
+                padding: EdgeInsets.fromLTRB(2, 0, 7, 0),
+                icon: Icon(Icons.menu_open),
+                // 🔄 Change this to any icon you like
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              ),
         ),
       ),
 
@@ -49,13 +55,11 @@ class _BottomNavState extends State<BottomNav> {
       body: _screens[_currentIndex],
 
       bottomNavigationBar: Container(
-
         child: SalomonBottomBar(
-
           currentIndex: _currentIndex,
           onTap: (i) => setState(() => _currentIndex = i),
           itemPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          items:  [
+          items: [
             SalomonBottomBarItem(
               icon: Icon(Icons.home),
               title: Text("Home"),

@@ -21,17 +21,17 @@ class DataListPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 23,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.white,
         ),
         body: Consumer<DataListViewModel>(
           builder: (context, viewModel, _) {
             if (viewModel.isLoading) {
               return Center(
                 child: SpinKitCubeGrid(
-                  color: Colors.red, // Customize color
+                  color: Colors.blueAccent, // Customize color
                   size: 60.0, // Customize size
                 ),
               );

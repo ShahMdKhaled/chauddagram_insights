@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../models/info_item.dart';
 
@@ -19,41 +20,48 @@ class MoreDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(item.name),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             // Optional Image Section
-            if (item.imageUrl != null && item.imageUrl!.isNotEmpty)
-              Container(
-
-                height: 150,
-                width: 150,
-                decoration: BoxDecoration(
-
-                  borderRadius: BorderRadius.circular(100),
-
-                  image: DecorationImage(
-                    image: NetworkImage(item.imageUrl!),
-                    fit: BoxFit.cover,
-
-                  ),
-                ),
-              )
-            else
-              Container(
-
-                height: 220,
-                width: double.infinity,
-                color: Colors.grey[300],
-                child: const Icon(Icons.person, size: 100, color: Colors.white),
-              ),
+            // if (item.imageUrl != null && item.imageUrl!.isNotEmpty)
+            //   Container(
+            //
+            //     height: 100,
+            //     width: 100,
+            //     decoration: BoxDecoration(
+            //
+            //       borderRadius: BorderRadius.circular(20),
+            //
+            //       image: DecorationImage(
+            //         image: NetworkImage(item.imageUrl!),
+            //         fit: BoxFit.cover,
+            //
+            //       ),
+            //     ),
+            //   )
+            //
+            // else
+            //   Container(
+            //
+            //     height: 100,
+            //     width: 100,
+            //
+            //
+            //     child:  SvgPicture.asset(
+            //       'assets/icons/person.svg',
+            //       height: 50,
+            //       width: 50,
+            //     ),
+            //
+            //   ),
 
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Card(
-                elevation: 4,
+                elevation: 8,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -62,6 +70,43 @@ class MoreDetailPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+
+
+
+
+
+                      if (item.imageUrl != null && item.imageUrl!.isNotEmpty)
+                        Container(
+
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+
+                            borderRadius: BorderRadius.circular(20),
+
+                            image: DecorationImage(
+                              image: NetworkImage(item.imageUrl!),
+                              fit: BoxFit.cover,
+
+                            ),
+                          ),
+                        )
+
+                      else
+                        Container(
+
+                          height: 100,
+                          width: 100,
+
+
+                          child:  SvgPicture.asset(
+                            'assets/icons/person.svg',
+                            height: 50,
+                            width: 50,
+                          ),
+
+                        ),
+
                       Text(
                         item.name,
 
@@ -74,9 +119,10 @@ class MoreDetailPage extends StatelessWidget {
                       const SizedBox(height: 10),
 
                       // Phone Row
+                      if (item.phoneNumber != null && item.phoneNumber!.isNotEmpty)
                       Row(
                         children: [
-                          const Icon(Icons.phone, color: Colors.green),
+                          // const Icon(Icons.phone, color: Colors.green),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(item.phoneNumber,
@@ -94,15 +140,21 @@ class MoreDetailPage extends StatelessWidget {
                       // Blood Type
                       if (item.bloodType != null && item.bloodType!.isNotEmpty)
                         Row(
+
                           children: [
-                            const Icon(Icons.bloodtype, color: Colors.red),
+
                             const SizedBox(width: 8),
                             Text(
-                              "Blood Type: ${item.bloodType}",
+                              " ${item.bloodType}",
                               style: const TextStyle(fontSize: 16),
                             ),
+
+                            Spacer(),
+
+                            const Icon(Icons.bloodtype, color: Colors.red),
                           ],
                         ),
+
 
                       const SizedBox(height: 16),
 

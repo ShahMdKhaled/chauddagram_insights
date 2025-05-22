@@ -1,4 +1,6 @@
+import 'package:chauddagram_insights/views/more_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import '../viewmodels/data_list_viewmodel.dart';
@@ -31,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
     {'title': 'Education', 'table': 'schools', 'icon': Icons.school},
     {'title': 'Trucks', 'table': 'trucks', 'icon': Icons.fire_truck},
   ];
+
+
 
 
   late DataListViewModel _bloodDonorViewModel;
@@ -88,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            // Grid Menu
+            // Grid Menu item view design
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
               child: GridView.builder(
@@ -96,9 +100,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: pages.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 5,
                   childAspectRatio: 1,
                 ),
                 itemBuilder: (context, index) {
@@ -116,15 +120,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
+
                         borderRadius: BorderRadius.circular(16),
                         gradient: LinearGradient(
-                          colors: [Colors.indigoAccent, Colors.blueAccent],
+
+                          colors: [Colors.blueAccent, Colors.blueAccent],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black12,
+                            color: Colors.black26,
                             blurRadius: 6,
                             offset: Offset(2, 4),
                           ),
@@ -143,9 +149,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             pages[index]['title'],
                             style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
                             ),
+
+
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -159,15 +167,48 @@ class _HomeScreenState extends State<HomeScreen> {
             // Section Title
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'নতুন রক্তদাতারা',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black87),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, // বাম ও ডানে আলাদা করে
+                children: [
+                  Text(
+                    'নতুন রক্তদাতা',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => DataListPage(
+                            tableName: 'blood_donors',
+                            title: 'Blood Donors',
+                          ),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'সকল >',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
 
+
+
             // Blood Donor List
             SizedBox(
-              height: 220,
+              height: 150,
               child: ChangeNotifierProvider<DataListViewModel>.value(
                 value: _bloodDonorViewModel,
                 child: Consumer<DataListViewModel>(
@@ -191,38 +232,40 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         final donor = recentDonors[index];
                         return Container(
-                          width: 160,
+                          width: 140,
                           margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
                           child: Card(
                             elevation: 3,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(20),
                             ),
                             child: InkWell(
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => DataListPage(
-                                      tableName: 'blood_donors',
-                                      title: 'Blood Donors',
-                                    ),
+                                    builder: (_) => MoreDetailPage(item: donor),
+
                                   ),
                                 );
                               },
                               child: Padding(
-                                padding: const EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     CircleAvatar(
-                                      radius: 35,
+                                      radius: 25,
                                       backgroundColor: Colors.grey[300],
                                       backgroundImage: donor.imageUrl != null
                                           ? NetworkImage(donor.imageUrl!)
                                           : null,
                                       child: donor.imageUrl == null
-                                          ? Icon(Icons.person, size: 35, color: Colors.grey)
+                                          ? SvgPicture.asset(
+                                        'assets/icons/person.svg',
+                                        height: 50,
+                                        width: 50,
+                                      )
                                           : null,
                                     ),
                                     const SizedBox(height: 10),
@@ -230,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       donor.name,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 14,
+                                        fontSize: 12,
                                         color: Colors.black87,
                                       ),
                                       overflow: TextOverflow.ellipsis,
@@ -240,6 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       donor.bloodType ?? '',
                                       style: TextStyle(color: Colors.red, fontSize: 12),
                                     ),
+
                                   ],
                                 ),
                               ),
