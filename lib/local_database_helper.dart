@@ -17,7 +17,7 @@ class DBHelper {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 3,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE info_items(
@@ -26,13 +26,19 @@ class DBHelper {
             picture TEXT,
             imageUrl TEXT,
             bloodType TEXT,
+            type TEXT,
             description TEXT,
             phoneNumber TEXT,
             googleMapLocation TEXT,
             createdAt TEXT,
             tableName TEXT
           )
-        ''');
+        ''');},
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 3) {
+          await db.execute('ALTER TABLE info_items ADD COLUMN type TEXT');
+        }
+        // future upgrades here
       },
     );
   }

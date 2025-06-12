@@ -4,6 +4,7 @@ class InfoItem {
   final String? picture;
   final String? imageUrl;
   final String? bloodType;
+  final String? type;
   final String? description;
   final String phoneNumber;
   final String? googleMapLocation;
@@ -15,6 +16,7 @@ class InfoItem {
     this.picture,
     this.imageUrl,
     this.bloodType,
+    this.type,
     this.description,
     this.googleMapLocation,
     required this.phoneNumber,
@@ -33,6 +35,7 @@ class InfoItem {
       picture: pictureUrl,
       imageUrl: pictureUrl,
       bloodType: json['blood_type'],
+      type: json['type'],
       description: json['description'] ?? json['details'] ?? '',
       phoneNumber: json['phone_number'] ?? '',
       googleMapLocation: json['google_map_location'],
@@ -47,6 +50,7 @@ class InfoItem {
       'picture': picture,
       'imageUrl': imageUrl,
       'bloodType': bloodType,
+      'type': type,
       'description': description,
       'phoneNumber': phoneNumber,
       'googleMapLocation': googleMapLocation,
@@ -62,6 +66,7 @@ class InfoItem {
       picture: map['picture'],
       imageUrl: map['imageUrl'],
       bloodType: map['bloodType'],
+      type: map['type'],
       description: map['description'],
       phoneNumber: map['phoneNumber'],
       googleMapLocation: map['googleMapLocation'],

@@ -1,7 +1,15 @@
+import 'package:chauddagram_insights/bottom_nav.dart';
+import 'package:chauddagram_insights/views/data_list_page.dart';
+
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
+
+  final List<Map<String, dynamic>> _drawerPages = const [
+    {'title': 'Emergency', 'table': 'emergency_numbers', 'icon': Icons.call},
+    {'title': 'Blood Donors', 'table': 'blood_donors', 'icon': Icons.bloodtype},
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +19,7 @@ class CustomDrawer extends StatelessWidget {
         children: [
           //  Drawer Header
           Container(
-            height: 160, // 👇 Jemon height chai, set koro (default er cheye kom)
+            height: 160,
             color: Colors.blueAccent,
             // 👇 left, top, right, bottom
             padding: EdgeInsets.fromLTRB(16, 23, 0, 0),
@@ -21,7 +29,8 @@ class CustomDrawer extends StatelessWidget {
                 // 🔵 Logo (left side)
                 CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage('assets/images/logo.png'),  // ✅ replace with your link
+                  backgroundImage: AssetImage('assets/images/logo.png'),
+                  // ✅ replace with your link
                   backgroundColor: Colors.white,
                 ),
                 SizedBox(width: 16),
@@ -41,10 +50,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     Text(
                       'সকল সেবা একই সাথে',
-                      style: TextStyle(
-                        color: Colors.yellow,
-                        fontSize: 13,
-                      ),
+                      style: TextStyle(color: Colors.yellow, fontSize: 13),
                     ),
                   ],
                 ),
@@ -52,41 +58,67 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
 
-
           // 🔷 Group: Dashboard
           Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text("DASHBOARD",
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              "DASHBOARD",
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.home),
             title: Text("Home"),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              // বর্তমান ড্রয়ার বন্ধ করুন
+              Navigator.pop(context);
+              // Homepage এ নেভিগেট করুন
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BottomNav(),
+                ), // <-- এখানে Homepage উইজেটটি যুক্ত করুন
+              );
+            },
           ),
-          ListTile(
-            leading: Icon(Icons.contact_emergency),
-            title: Text("Emergency"),
-            onTap: () {},
-          ),
+
+
+          ..._drawerPages.map((pageData) {
+            return ListTile(
+              leading: Icon(pageData['icon']),
+              title: Text(pageData['title']),
+              onTap: () {
+                Navigator.pop(context); // ড্রয়ার বন্ধ করুন
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => DataListPage(
+                      tableName: pageData['table'],
+                      title: pageData['title'],
+                    ),
+                  ),
+                );
+              },
+            );
+          }).toList(),
+
+
           ListTile(
             leading: Icon(Icons.add_home),
             title: Text("To late"),
             onTap: () {},
           ),
-          ListTile(
-            leading: Icon(Icons.bloodtype),
-            title: Text("Blood Bank"),
-            onTap: () {},
-          ),
+
 
           Divider(),
 
           // 🔷 Group: Settings
           Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text("SETTINGS",
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              "SETTINGS",
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.settings),
@@ -103,8 +135,10 @@ class CustomDrawer extends StatelessWidget {
           // 🔷 Group: Account
           Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Text("ACCOUNT",
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+            child: Text(
+              "ACCOUNT",
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.person),
@@ -119,9 +153,6 @@ class CustomDrawer extends StatelessWidget {
               // Use your logout logic here
             },
           ),
-
-
-
         ],
       ),
     );

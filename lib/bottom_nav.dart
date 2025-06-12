@@ -1,12 +1,15 @@
 import 'package:chauddagram_insights/views/home_screen.dart';
+import 'package:chauddagram_insights/views/profileitem.dart';
+import 'package:chauddagram_insights/views/search_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import 'custom_drawer.dart';
 
 class BottomNav extends StatefulWidget {
-  const BottomNav({super.key});
+
+  const BottomNav({super.key });
 
   @override
   State<BottomNav> createState() => _BottomNavState();
@@ -15,25 +18,49 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   int _currentIndex = 0;
 
+
+  final List<Map<String, dynamic>> pages =  [
+    {'title': 'জরুরি', 'table': 'emergency_numbers', },
+    {'title': 'হাসপাতাল', 'table': 'hospitals', },
+    {'title': 'ব্যাংক', 'table': 'banks', },
+    {'title': 'অ্যাম্বুলেন্স', 'table': 'ambulances', },
+    {'title': 'রক্তদাতা', 'table': 'blood_donors', },
+    {'title': 'ডাক্তার', 'table': 'doctors', },
+    {'title': 'মিস্ত্রি', 'table': 'mechanics', },
+    {'title': 'শিক্ষা প্রতিষ্ঠান', 'table': 'schools', },
+    {'title': 'ট্রাক', 'table': 'trucks', },
+  ];
+
   final List<Widget> _screens = [
     HomeScreen(),
-    Center(child: Text('Likes Screen')),
-    Center(child: Text('Search Screen')),
-    Center(child: Text('Profile Screen')),
+    Center(child: Text('Coming Soon...')),
+    SearchPage(tableName: 'emergency_numbers'), // এখানে পাস করলাম
+    ProfileItem()
   ];
+
+
+
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Chauddagram Insights"),
-        titleTextStyle: TextStyle(fontSize: 20, color: Colors.black
-
-        ),
-
         backgroundColor: Colors.white,
+        elevation: 2,
         centerTitle: true,
+        title: SizedBox(
+          height: 40,
 
+          child: Image.asset(
+            'assets/images/headerlogo.png',
+            fit: BoxFit.contain,
+            errorBuilder: (context, error, stackTrace) {
+              return const Text("Logo not found", style: TextStyle(color: Colors.red));
+            },
+          ),
+        ),
         automaticallyImplyLeading: false,
 
         // ❌ Default drawer icon বন্ধ করলো
@@ -47,41 +74,42 @@ class _BottomNavState extends State<BottomNav> {
                 onPressed: () => Scaffold.of(context).openDrawer(),
               ),
         ),
+
+
+
       ),
 
       drawer: const CustomDrawer(),
 
-      // 🔽 এখানে AppBar সরিয়ে দিলে তোমার প্রতিটি স্ক্রিন তার নিজের AppBar রাখতে পারবে
+
       body: _screens[_currentIndex],
 
-      bottomNavigationBar: Container(
-        child: SalomonBottomBar(
-          currentIndex: _currentIndex,
-          onTap: (i) => setState(() => _currentIndex = i),
-          itemPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          items: [
-            SalomonBottomBarItem(
-              icon: Icon(Icons.home),
-              title: Text("Home"),
-              selectedColor: Colors.blueAccent,
-            ),
-            SalomonBottomBarItem(
-              icon: Icon(Icons.favorite_border),
-              title: Text("Likes"),
-              selectedColor: Colors.blueAccent,
-            ),
-            SalomonBottomBarItem(
-              icon: Icon(Icons.search),
-              title: Text("Search"),
-              selectedColor: Colors.blueAccent,
-            ),
-            SalomonBottomBarItem(
-              icon: Icon(Icons.person),
-              title: Text("Profile"),
-              selectedColor: Colors.blueAccent,
-            ),
-          ],
-        ),
+      bottomNavigationBar: SalomonBottomBar(
+        currentIndex: _currentIndex,
+        onTap: (i) => setState(() => _currentIndex = i),
+        itemPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        items: [
+          SalomonBottomBarItem(
+            icon: Icon(Icons.home),
+            title: Text("Home"),
+            selectedColor: Colors.blueAccent,
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(Icons.favorite_border),
+            title: Text("Likes"),
+            selectedColor: Colors.blueAccent,
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(Icons.search),
+            title: Text("Search"),
+            selectedColor: Colors.blueAccent,
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(Icons.person),
+            title: Text("Profile"),
+            selectedColor: Colors.blueAccent,
+          ),
+        ],
       ),
     );
   }
