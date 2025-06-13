@@ -66,6 +66,8 @@ class DataListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   // Search query filter
   void search(String query) {
     searchQuery = query;

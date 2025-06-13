@@ -49,7 +49,7 @@ class ProfileItem extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => const PrivacyPolicy(
                         title: "গোপনীয়তা নীতি",
-                        url: "https://www.termsfeed.com/live/532e63a8-6d6a-4999-bf2b-24fc66159163",
+                        url: "https://sites.google.com/view/privacy-policy-chauddagram-ins/home",
                       ),
                     ),
                   );

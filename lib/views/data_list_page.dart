@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
+
 import '../viewmodels/data_list_viewmodel.dart';
+
 import 'components/info_card.dart';
 
 class DataListPage extends StatelessWidget {
   final String tableName;
+
   final String title;
 
   const DataListPage({super.key, required this.tableName, required this.title});
@@ -40,6 +43,20 @@ class DataListPage extends StatelessWidget {
             ),
           ],
         ),
+
+        //floating action button
+
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text("Coming Soon.."),
+            ));
+          },
+          child: const Icon(Icons.add),
+        ),
+
+
+
         body: Consumer<DataListViewModel>(
           builder: (context, viewModel, _) {
             if (viewModel.isLoading) {

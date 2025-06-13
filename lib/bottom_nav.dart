@@ -1,3 +1,4 @@
+import 'package:chauddagram_insights/views/contactpage.dart';
 import 'package:chauddagram_insights/views/home_screen.dart';
 import 'package:chauddagram_insights/views/profileitem.dart';
 import 'package:chauddagram_insights/views/search_page.dart';
@@ -33,8 +34,8 @@ class _BottomNavState extends State<BottomNav> {
 
   final List<Widget> _screens = [
     HomeScreen(),
-    Center(child: Text('Coming Soon...')),
-    SearchPage(tableName: 'emergency_numbers'), // এখানে পাস করলাম
+    ContactPage(),
+    SearchPage(tableName: 'emergency_numbers'),
     ProfileItem()
   ];
 
@@ -48,10 +49,10 @@ class _BottomNavState extends State<BottomNav> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 2,
+        elevation: 3,
         centerTitle: true,
         title: SizedBox(
-          height: 40,
+          height: 55,
 
           child: Image.asset(
             'assets/images/headerlogo.png',
@@ -64,16 +65,16 @@ class _BottomNavState extends State<BottomNav> {
         automaticallyImplyLeading: false,
 
         // ❌ Default drawer icon বন্ধ করলো
-        leading: Builder(
-          // ✅ Custom icon clickable রাখার জন্য
-          builder:
-              (context) => IconButton(
-                padding: EdgeInsets.fromLTRB(2, 0, 7, 0),
-                icon: Icon(Icons.menu_open),
-                // 🔄 Change this to any icon you like
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              ),
-        ),
+        // leading: Builder(
+        //   // ✅ Custom icon clickable রাখার জন্য
+        //   builder:
+        //       (context) => IconButton(
+        //         padding: EdgeInsets.fromLTRB(2, 0, 7, 0),
+        //         icon: Icon(Icons.menu_open),
+        //         // 🔄 Change this to any icon you like
+        //         onPressed: () => Scaffold.of(context).openDrawer(),
+        //       ),
+        // ),
 
 
 
@@ -95,8 +96,8 @@ class _BottomNavState extends State<BottomNav> {
             selectedColor: Colors.blueAccent,
           ),
           SalomonBottomBarItem(
-            icon: Icon(Icons.favorite_border),
-            title: Text("Likes"),
+            icon: Icon(Icons.contact_mail_outlined),
+            title: Text("Contasct"),
             selectedColor: Colors.blueAccent,
           ),
           SalomonBottomBarItem(
