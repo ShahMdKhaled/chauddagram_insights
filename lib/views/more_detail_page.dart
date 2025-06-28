@@ -268,36 +268,39 @@ class MoreDetailPage extends StatelessWidget {
             // Details Card
             if (item.description != null && item.description!.isNotEmpty)
               Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  color: cardColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'বিস্তারিত',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: primaryColor,
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0), // Left, Top, Right, Bottom
+                child: Container(
+                  width: double.infinity,
+                  child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    color: cardColor,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'বিস্তারিত',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: primaryColor,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          item.description!,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: textSecondary,
-                            height: 1.5,
+                          const SizedBox(height: 12),
+                          Text(
+                            item.description!,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: textSecondary,
+                              height: 1.5,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

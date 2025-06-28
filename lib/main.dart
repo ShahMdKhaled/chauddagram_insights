@@ -1,7 +1,5 @@
-import 'package:chauddagram_insights/bottom_nav.dart';
-import'package:flutter/material.dart';
-
-
+import 'package:chauddagram_insights/views/splash_screen.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,31 +8,15 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
-
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
       title: 'Chauddagram Insights',
-
       theme: ThemeData(
-
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
       ),
-
-      home: const BottomNav()
-
-
-
+      home: const SplashScreen(), // এখন প্রথমে Splash Screen দেখাবে
     );
   }
 }
-
-
-
