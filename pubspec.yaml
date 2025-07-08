@@ -59,6 +59,7 @@ dependencies:
     #loading animation
   cached_network_image: ^3.4.1
   webview_flutter: ^4.13.0
+  flutter_launcher_icons: ^0.14.4
 
 
 
@@ -73,6 +74,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/icon.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

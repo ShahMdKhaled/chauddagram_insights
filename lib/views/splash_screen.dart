@@ -138,7 +138,7 @@ class _SplashScreenState extends State<SplashScreen>
                 Opacity(
                   opacity: _textOpacityAnimation.value,
                   child: Text(
-                    'Data-driven decisions',
+                    'সকল সেবা একই সাথে',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey.shade600,
