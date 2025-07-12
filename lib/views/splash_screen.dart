@@ -100,17 +100,17 @@ class _SplashScreenState extends State<SplashScreen>
                 Container(
                   width: 120,
                   height: 120,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: _colorAnimation.value!.withOpacity(0.3),
-                        blurRadius: 25,
-                        spreadRadius: 5,
-                      ),
-                    ],
-                  ),
-                  child: Image.asset('assets/images/logo.png', height: 80),
+                  // decoration: BoxDecoration(
+                  //   shape: BoxShape.circle,
+                  //   boxShadow: [
+                  //     BoxShadow(
+                  //       color: _colorAnimation.value!.withOpacity(0.3),
+                  //       blurRadius: 25,
+                  //       spreadRadius: 5,
+                  //     ),
+                  //   ],
+                  // ),
+                  child: Image.asset('assets/images/bgrlogo.png', height: 80),
                 ),
 
                 const SizedBox(height: 30),

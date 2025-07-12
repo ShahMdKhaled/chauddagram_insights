@@ -17,7 +17,7 @@
 
 
     <application
-        android:label="chauddagram_insights"
+        android:label="Chauddagram Insights"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
 
