@@ -97,7 +97,7 @@ class _BottomNavState extends State<BottomNav> {
           ),
           SalomonBottomBarItem(
             icon: Icon(Icons.contact_mail_outlined),
-            title: Text("Contasct"),
+            title: Text("Contacts"),
             selectedColor: Colors.blueAccent,
           ),
           SalomonBottomBarItem(
