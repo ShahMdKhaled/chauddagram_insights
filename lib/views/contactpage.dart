@@ -152,8 +152,8 @@ class ContactPage extends StatelessWidget {
             ContactMethodTile(
               icon: Icons.location_on,
               title: 'Visit Us',
-              subtitle: '123 Street, Dhaka, Bangladesh',
-              onTap: () => _launchURL('https://maps.google.com/?q=123+Street+Dhaka+Bangladesh'),
+              subtitle: 'Chauddagram Bazar, Cumilla, Bangladesh',
+              onTap: () => _launchURL('https://maps.app.goo.gl/WmRkkdvcyeFH9vYu7'),
             ),
             const SizedBox(height: 20),
 
@@ -163,27 +163,27 @@ class ContactPage extends StatelessWidget {
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: Image.asset('assets/facebook.png', height: 30),
-                  onPressed: () => _launchURL('https://facebook.com/bloodapp'),
-                ),
-                IconButton(
-                  icon: Image.asset('assets/twitter.png', height: 30),
-                  onPressed: () => _launchURL('https://twitter.com/bloodapp'),
-                ),
-                IconButton(
-                  icon: Image.asset('assets/instagram.png', height: 30),
-                  onPressed: () => _launchURL('https://instagram.com/bloodapp'),
-                ),
-                IconButton(
-                  icon: Image.asset('assets/whatsapp.png', height: 30),
-                  onPressed: () => _launchURL('https://wa.me/8801234567890'),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     IconButton(
+            //       icon: Image.asset('assets/facebook.png', height: 30),
+            //       onPressed: () => _launchURL('https://facebook.com/bloodapp'),
+            //     ),
+            //     IconButton(
+            //       icon: Image.asset('assets/twitter.png', height: 30),
+            //       onPressed: () => _launchURL('https://twitter.com/bloodapp'),
+            //     ),
+            //     IconButton(
+            //       icon: Image.asset('assets/instagram.png', height: 30),
+            //       onPressed: () => _launchURL('https://instagram.com/bloodapp'),
+            //     ),
+            //     IconButton(
+            //       icon: Image.asset('assets/whatsapp.png', height: 30),
+            //       onPressed: () => _launchURL('https://wa.me/8801234567890'),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
