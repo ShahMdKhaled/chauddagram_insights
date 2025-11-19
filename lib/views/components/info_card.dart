@@ -14,9 +14,14 @@ class InfoCard extends StatelessWidget {
 
   Future<void> _makeCall(String phone, BuildContext context) async {
     String formattedPhone = phone.replaceAll(' ', '').trim();
-    if (!formattedPhone.startsWith('+') && !formattedPhone.startsWith('0')) {
-      formattedPhone = '+880$formattedPhone';
-    }
+
+    formattedPhone = formattedPhone;
+
+    // if (!formattedPhone.startsWith('+') && !formattedPhone.startsWith('0')) {
+    //   formattedPhone = '+880$formattedPhone';
+    // }
+
+
     final Uri uri = Uri(scheme: 'tel', path: formattedPhone);
     var status = await Permission.phone.status;
     if (!status.isGranted) {

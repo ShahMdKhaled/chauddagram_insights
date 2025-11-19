@@ -44,6 +44,8 @@ class DataListPage extends StatelessWidget {
           ],
         ),
 
+
+        //left side + icon
         //floating action button
 
         floatingActionButton: FloatingActionButton(
@@ -83,7 +85,10 @@ class DataListPage extends StatelessWidget {
 
             return Column(
               children: [
+
+
                 // Search Bar
+                //local search bar
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                   child: Material(

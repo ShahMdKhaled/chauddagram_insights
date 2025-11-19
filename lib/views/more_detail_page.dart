@@ -13,12 +13,12 @@ class MoreDetailPage extends StatelessWidget {
     try {
       String formattedPhone = phone.replaceAll(' ', '').trim();
 
-
-      if (!formattedPhone.startsWith('+') && !formattedPhone.startsWith('0')) {
-        formattedPhone = '+880$formattedPhone';
-      } else if (formattedPhone.startsWith('0')) {
-        formattedPhone = '+880${formattedPhone.substring(1)}';
-      }
+      formattedPhone = formattedPhone;
+      // if (!formattedPhone.startsWith('+') && !formattedPhone.startsWith('0')) {
+      //
+      // } else if (formattedPhone.startsWith('0')) {
+      //   formattedPhone = ${formattedPhone.substring(1)};
+      // }
 
       final Uri uri = Uri(scheme: 'tel', path: formattedPhone);
 
@@ -44,13 +44,13 @@ class MoreDetailPage extends StatelessWidget {
   Future<void> _sendSMS(String phone, BuildContext context) async {
     try {
       String formattedPhone = phone.replaceAll(' ', '').trim();
-
+      formattedPhone = formattedPhone;
       // বাংলাদেশের জন্য ফোন নম্বর ফরম্যাটিং
-      if (!formattedPhone.startsWith('+') && !formattedPhone.startsWith('0')) {
-        formattedPhone = '+880$formattedPhone';
-      } else if (formattedPhone.startsWith('0')) {
-        formattedPhone = '+880${formattedPhone.substring(1)}';
-      }
+      // if (!formattedPhone.startsWith('+') && !formattedPhone.startsWith('0')) {
+      //   formattedPhone = '+880$formattedPhone';
+      // } else if (formattedPhone.startsWith('0')) {
+      //   formattedPhone = '+880${formattedPhone.substring(1)}';
+      // }
 
       final Uri uri = Uri(scheme: 'sms', path: formattedPhone);
 
