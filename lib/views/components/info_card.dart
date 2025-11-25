@@ -8,8 +8,6 @@ import '../more_detail_page.dart';
 class InfoCard extends StatelessWidget {
   final InfoItem item;
 
-
-
   const InfoCard({super.key, required this.item});
 
   Future<void> _makeCall(String phone, BuildContext context) async {
@@ -20,7 +18,6 @@ class InfoCard extends StatelessWidget {
     // if (!formattedPhone.startsWith('+') && !formattedPhone.startsWith('0')) {
     //   formattedPhone = '+880$formattedPhone';
     // }
-
 
     final Uri uri = Uri(scheme: 'tel', path: formattedPhone);
     var status = await Permission.phone.status;
@@ -38,9 +35,9 @@ class InfoCard extends StatelessWidget {
         );
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Call permission denied')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Call permission denied')));
     }
   }
 
@@ -49,9 +46,9 @@ class InfoCard extends StatelessWidget {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Could not launch map')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Could not launch map')));
     }
   }
 
@@ -63,9 +60,7 @@ class InfoCard extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => MoreDetailPage(item: item),
-            ),
+            MaterialPageRoute(builder: (context) => MoreDetailPage(item: item)),
           );
         },
         child: Padding(
@@ -75,26 +70,28 @@ class InfoCard extends StatelessWidget {
             children: [
               // Image
               Center(
-                child: item.imageUrl != null
-                    ? ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Image.network(
-                    item.imageUrl!,
-                    width: 45,
-                    height: 45,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => SvgPicture.asset(
-                      'assets/icons/person.svg',
-                      height: 45,
-                      width: 45,
-                    ),
-                  ),
-                )
-                    : SvgPicture.asset(
-                  'assets/icons/person.svg',
-                  height: 45,
-                  width: 45,
-                ),
+                child:
+                    item.imageUrl != null
+                        ? ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: Image.network(
+                            item.imageUrl!,
+                            width: 45,
+                            height: 45,
+                            fit: BoxFit.cover,
+                            errorBuilder:
+                                (_, __, ___) => SvgPicture.asset(
+                                  'assets/icons/person.svg',
+                                  height: 45,
+                                  width: 45,
+                                ),
+                          ),
+                        )
+                        : SvgPicture.asset(
+                          'assets/icons/person.svg',
+                          height: 45,
+                          width: 45,
+                        ),
               ),
               const SizedBox(width: 10),
 
@@ -108,6 +105,7 @@ class InfoCard extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
+                        fontFamily: 'HindSiliguri',
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -115,17 +113,18 @@ class InfoCard extends StatelessWidget {
                     if ((item.type ?? '').trim().isNotEmpty)
                       Text(
                         item.type!,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey[600],
-                        ),
+                        style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     Text(
                       item.description ?? '',
-                      style: const TextStyle(fontSize: 13),
-                      maxLines: 1,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'HindSiliguri',
+                        fontWeight: FontWeight.w400,
+                      ),
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
@@ -148,8 +147,13 @@ class InfoCard extends StatelessWidget {
                   if (item.googleMapLocation != null &&
                       item.googleMapLocation!.isNotEmpty)
                     IconButton(
-                      icon: const Icon(Icons.pin_drop, color: Colors.blue, size: 22),
-                      onPressed: () => _openMap(item.googleMapLocation!, context),
+                      icon: const Icon(
+                        Icons.pin_drop,
+                        color: Colors.blue,
+                        size: 22,
+                      ),
+                      onPressed:
+                          () => _openMap(item.googleMapLocation!, context),
                     ),
                   IconButton(
                     icon: const Icon(Icons.call, color: Colors.green, size: 22),

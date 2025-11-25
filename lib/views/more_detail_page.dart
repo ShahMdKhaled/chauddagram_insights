@@ -159,6 +159,7 @@ class MoreDetailPage extends StatelessWidget {
                           item.name,
                           style: TextStyle(
                             fontSize: 22,
+                            fontFamily: 'HindSiliguri' ,
                             fontWeight: FontWeight.w600,
                             color: textPrimary,
                           ),
@@ -294,7 +295,8 @@ class MoreDetailPage extends StatelessWidget {
                           Text(
                             item.description!,
                             style: TextStyle(
-                              fontSize: 14,
+                              fontFamily: 'HindSiliguri' , fontWeight: FontWeight.w500,
+                              //fontSize: 14,
                               color: textSecondary,
                               height: 1.5,
                             ),

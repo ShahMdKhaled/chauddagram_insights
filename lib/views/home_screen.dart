@@ -188,7 +188,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(
                               color: Colors.grey[800],
                               fontWeight: FontWeight.w600,
-                              fontSize: 11,
+                              fontFamily: 'HindSiliguri' ,
+                              fontSize: 12,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -212,6 +213,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     'নতুন রক্তদাতা',
                     style: TextStyle(
+                      fontFamily: 'HindSiliguri' ,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey[800],
@@ -242,6 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Text(
                         'সকল দেখুন',
                         style: TextStyle(
+                          fontFamily: 'HindSiliguri' ,
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                           color: Colors.blue[800],
@@ -257,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // Blood Donors List
           SliverToBoxAdapter(
             child: SizedBox(
-              height: 180,
+              height: 178,
               child: ChangeNotifierProvider<DataListViewModel>.value(
                 value: _bloodDonorViewModel,
                 child: Consumer<DataListViewModel>(
@@ -283,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       return const Center(
                         child: Text(
                           'কোনো রক্তদাতা পাওয়া যায়নি',
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: 16, fontFamily: 'HindSiliguri' ),
                         ),
                       );
                     }
