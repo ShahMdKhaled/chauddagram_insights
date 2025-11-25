@@ -17,7 +17,7 @@ class DBHelper {
 
     return await openDatabase(
       path,
-      version: 3,
+      version: 4,  // version change for meta_data table
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE info_items(
@@ -33,16 +33,35 @@ class DBHelper {
             createdAt TEXT,
             tableName TEXT
           )
-        ''');},
+        ''');
+
+        // NEW TABLE for storing last update time
+        await db.execute('''
+          CREATE TABLE meta_data(
+            key TEXT PRIMARY KEY,
+            value TEXT
+          )
+        ''');
+      },
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 3) {
           await db.execute('ALTER TABLE info_items ADD COLUMN type TEXT');
         }
-        // future upgrades here
+        if (oldVersion < 4) {
+          await db.execute('''
+            CREATE TABLE meta_data(
+              key TEXT PRIMARY KEY,
+              value TEXT
+            )
+          ''');
+        }
       },
     );
   }
 
+  // -------------------------------------------------------------
+  // INSERT ITEMS
+  // -------------------------------------------------------------
   Future<void> insertItem(InfoItem item, String tableName) async {
     final db = await database;
     await db.insert(
@@ -52,6 +71,9 @@ class DBHelper {
     );
   }
 
+  // -------------------------------------------------------------
+  // GET ITEMS
+  // -------------------------------------------------------------
   Future<List<InfoItem>> getItems(String tableName) async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
@@ -65,6 +87,9 @@ class DBHelper {
     });
   }
 
+  // -------------------------------------------------------------
+  // CLEAR ITEMS
+  // -------------------------------------------------------------
   Future<void> clearItems(String tableName) async {
     final db = await database;
     await db.delete(
@@ -72,5 +97,35 @@ class DBHelper {
       where: 'tableName = ?',
       whereArgs: [tableName],
     );
+  }
+
+  // -------------------------------------------------------------
+  // SAVE LAST UPDATE TIME (NEW)
+  // -------------------------------------------------------------
+  Future<void> saveLastUpdateTime() async {
+    final db = await database;
+    await db.insert(
+      'meta_data',
+      {
+        'key': 'last_update',
+        'value': DateTime.now().toIso8601String(),
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  // -------------------------------------------------------------
+  // GET LAST UPDATE TIME (NEW)
+  // -------------------------------------------------------------
+  Future<DateTime?> getLastUpdateTime() async {
+    final db = await database;
+    final result = await db.query(
+      'meta_data',
+      where: 'key = ?',
+      whereArgs: ['last_update'],
+    );
+
+    if (result.isEmpty) return null;
+    return DateTime.tryParse(result.first['value'] as String);
   }
 }

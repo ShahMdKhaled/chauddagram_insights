@@ -10,16 +10,14 @@ class DataListViewModel extends ChangeNotifier {
   bool isLoading = false;
   String searchQuery = '';
 
-
   final DBHelper _dbHelper = DBHelper();
 
   // Filters
-  List<String> filters = []; // Optional filter list
+  List<String> filters = [];
   String? selectedFilter;
 
   void setFilter(String filter) {
     selectedFilter = filter;
-    // You can filter `items` here if needed
     notifyListeners();
   }
 
@@ -29,8 +27,44 @@ class DataListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ============================================================
+  // NEW: LOAD DATA WITH CACHE (24 HOUR CHECK)
+  // ============================================================
+  Future<void> loadDataWithCache(String tableName) async {
+    isLoading = true;
+    notifyListeners();
 
-  // Fetch data from API or local DB
+    // Get last update timestamp
+    DateTime? lastUpdate = await _dbHelper.getLastUpdateTime();
+
+    // If last update exists and is less than 24 hours old
+    if (lastUpdate != null) {
+      Duration diff = DateTime.now().difference(lastUpdate);
+
+      if (diff.inHours < 24) {
+        // Load from local DB
+        items = await _dbHelper.getItems(tableName);
+        _allItems = items;
+
+        isLoading = false;
+        notifyListeners();
+        return;
+      }
+    }
+
+    // Else fetch fresh API data
+    await fetchData(tableName);
+
+    // Save last update timestamp
+    await _dbHelper.saveLastUpdateTime();
+
+    isLoading = false;
+    notifyListeners();
+  }
+
+  // ============================================================
+  // EXISTING: Fetch data from API or Local DB
+  // ============================================================
   Future<void> fetchData(String tableName) async {
     isLoading = true;
     notifyListeners();
@@ -47,6 +81,7 @@ class DataListViewModel extends ChangeNotifier {
         data.map((e) => InfoItem.fromJson(e, tableName)).toList();
 
         await _dbHelper.clearItems(tableName);
+
         for (var item in fetchedItems) {
           await _dbHelper.insertItem(item, tableName);
         }
@@ -66,9 +101,9 @@ class DataListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
-  // Search query filter
+  // ============================================================
+  // Search Filter
+  // ============================================================
   void search(String query) {
     searchQuery = query;
     if (query.isEmpty) {
@@ -77,11 +112,11 @@ class DataListViewModel extends ChangeNotifier {
       final lowerQuery = query.toLowerCase();
       items = _allItems.where((item) {
         final nameMatch = item.name.toLowerCase().contains(lowerQuery);
-        final descriptionMatch = item.description?.toLowerCase().contains(lowerQuery) ?? false;
+        final descriptionMatch =
+            item.description?.toLowerCase().contains(lowerQuery) ?? false;
         return nameMatch || descriptionMatch;
       }).toList();
     }
     notifyListeners();
   }
-
 }

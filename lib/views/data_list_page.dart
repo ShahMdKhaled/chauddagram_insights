@@ -112,7 +112,7 @@ class DataListPage extends StatelessWidget {
                   ),
                 ),
 
-                // Filter Chips (optional)
+                // Filter Chips (opt ional)
                 if (viewModel.filters.isNotEmpty)
                   SizedBox(
                     height: 50,

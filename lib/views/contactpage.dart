@@ -20,8 +20,8 @@ void sendEmail() async {
 
       final message =
           Message()
-            ..from = Address(username, 'Your App')
-            ..recipients.add(email) //email came from secret.dart
+            ..from = Address(username, 'Chauddagram Insights')
+            ..recipients.add(sentemail) //email came from secret.dart
             ..subject = 'New Contact Form Message'
             ..text = """
 Name: ${nameController.text}
